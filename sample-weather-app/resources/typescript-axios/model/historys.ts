@@ -13,6 +13,13 @@
  */
 
 
+import { History } from './history';
 
-export * from './api/default-api';
+/**
+ * weather data
+ * @export
+ * @interface Historys
+ */
+export interface Historys extends Array<History> {
+}
 

@@ -1,8 +1,12 @@
 .gitignore
 .npmignore
 api.ts
+api/default-api.ts
 base.ts
 common.ts
 configuration.ts
 git_push.sh
 index.ts
+model/history.ts
+model/historys.ts
+model/index.ts

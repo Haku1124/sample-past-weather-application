@@ -8,56 +8,60 @@ paths:
   "/api/analyzed":
     get:
       operationId: fetchData
-      parameters: []
       responses:
         '200':
           description: 'OK'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/History'
+                $ref: "#/components/schemas/Historys"
 components:
   schemas:
-    History:
+    Historys:
+      description: weather data
       type: Array
-      properties:
-        id:
-            type: integer
-            format: int32
-        weather_id:
-            type: integer
-            format: int32
-        city_name:
-            type: string
-        city_id: 
-            type: integer
-            format: int32
-        main: 
-            type: string
-        main_description: 
-            type: string
-        temp_min: 
-            type: integer
-            format: int32
-        temp_max: 
-            type: integer
-            format: int32
-        pressure: 
-            type: integer
-            format: int32
-        humidity: 
-            type: integer
-            format: int32
-        wind_speed: 
-            type: integer
-            format: int32
-        date: 
-            type: string
-            format: date
-        created_at: 
-            type: string
-            format: date-time
-      required:
-        - id
-        - date
-        - created_at
+      items:
+        $ref: "#/components/schemas/History"
+    History:
+        type: object
+        properties:
+          id:
+              type: integer
+              format: int32
+          weather_id:
+              type: integer
+              format: int32
+          city_name:
+              type: string
+          city_id: 
+              type: integer
+              format: int32
+          main: 
+              type: string
+          main_description: 
+              type: string
+          temp_min: 
+              type: integer
+              format: int32
+          temp_max: 
+              type: integer
+              format: int32
+          pressure: 
+              type: integer
+              format: int32
+          humidity: 
+              type: integer
+              format: int32
+          wind_speed: 
+              type: integer
+              format: int32
+          date: 
+              type: string
+              format: date
+          created_at: 
+              type: string
+              format: date-time
+        required:
+          - id
+          - date
+          - created_at
