@@ -1,0 +1,1 @@
+SELECT * FROM `laravel`.`weather_data_histories` LIMIT 1000;
