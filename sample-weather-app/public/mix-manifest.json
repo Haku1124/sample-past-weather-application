@@ -1,3 +1,4 @@
 {
-    "/main.js": "/main.js"
+    "/js/index.js": "/js/index.js",
+    "/css/app.css": "/css/app.css"
 }
