@@ -47,6 +47,7 @@ class GetWeatherDataBatch extends Command
             foreach ($results['list'] as $city => $details) {
                 $insert_record = array(
                     'weather_id' => $details['weather'][0]['id'],
+                    'icon_id' => $details['weather'][0]['icon'],
                     'city_id' => $details['id'],
                     'city_name' => $details['name'],
                     'main' => $details['weather'][0]['main'],

@@ -9,6 +9,7 @@ class WeatherDataHistory extends Model
 {
     protected $fillable = [
         'weather_id',
+        'icon_id',
         'city_name',
         'city_id',
         'main',

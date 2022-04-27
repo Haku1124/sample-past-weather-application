@@ -37,6 +37,12 @@ export interface History {
      * @type {string}
      * @memberof History
      */
+    'icon_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof History
+     */
     'city_name'?: string;
     /**
      * 

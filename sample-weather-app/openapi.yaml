@@ -31,6 +31,8 @@ components:
           weather_id:
               type: integer
               format: int32
+          icon_id:
+              type: string
           city_name:
               type: string
           city_id: 

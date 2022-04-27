@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('weather_data_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('weather_id');
+            $table->string('icon_id');
             $table->string('city_name', 50);
             $table->integer('city_id');
             $table->string('main', 50);
