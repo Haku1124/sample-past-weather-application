@@ -23,7 +23,7 @@ class AnalyzedController extends Controller
                     ->whereRaw('weather_data_histories.date >= DATE_SUB(CURDATE(), INTERVAL ' . $length . ' DAY)')
                     ->groupBy('weather_data_histories.date', 'weather_data_histories.city_id');
             })
-                ->orderBy('date')
+                ->orderBy('date', 'desc')
                 ->get();
                 // ->toSql();
         } catch (Exception $e) {

@@ -8795,10 +8795,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/ts/index.tsx":
-/*!********************************!*\
-  !*** ./resources/ts/index.tsx ***!
-  \********************************/
+/***/ "./resources/ts/components/CardContents.tsx":
+/*!**************************************************!*\
+  !*** ./resources/ts/components/CardContents.tsx ***!
+  \**************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -8999,23 +8999,23 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
+var default_api_1 = __webpack_require__(/*! ../../typescript-axios/api/default-api */ "./resources/typescript-axios/api/default-api.ts");
 
-var default_api_1 = __webpack_require__(/*! ../typescript-axios/api/default-api */ "./resources/typescript-axios/api/default-api.ts"); // import { Historys } from '../typescript-axios/model/historys';
+var TableBody_1 = __importDefault(__webpack_require__(/*! ./../components/TableBody */ "./resources/ts/components/TableBody.tsx"));
 
+var TableHead_1 = __importDefault(__webpack_require__(/*! ./../components/TableHead */ "./resources/ts/components/TableHead.tsx"));
 
 var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 
-__webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ "./node_modules/bootstrap/dist/css/bootstrap.css");
-
-var moment_1 = __importDefault(__webpack_require__(/*! moment */ "./node_modules/moment/moment.js"));
-
-var App = function App() {
+var CardContents = function CardContents(_a) {
+  var cityNameUpperCase = _a.cityNameUpperCase,
+      cityNameLowerCase = _a.cityNameLowerCase,
+      cityId = _a.cityId;
   var api = new default_api_1.DefaultApi();
 
-  var _a = (0, react_1.useState)([]),
-      datas = _a[0],
-      setDatas = _a[1];
+  var _b = (0, react_1.useState)([]),
+      datas = _b[0],
+      setDatas = _b[1];
 
   var getDates = function getDates() {
     return __awaiter(void 0, void 0, void 0, function () {
@@ -9040,9 +9040,144 @@ var App = function App() {
 
   (0, react_1.useEffect)(function () {
     getDates();
-    console.log(datas);
-  }, []); // console.log(datas);
+  }, []);
+  return react_1["default"].createElement(react_bootstrap_1.Card, null, react_1["default"].createElement(react_bootstrap_1.Card.Img, {
+    src: "/assets/image/".concat(cityNameLowerCase, ".gif"),
+    alt: "Card image"
+  }), react_1["default"].createElement(react_bootstrap_1.Card.Body, null, react_1["default"].createElement(react_bootstrap_1.Card.Title, null, cityNameUpperCase), react_1["default"].createElement(react_bootstrap_1.Row, {
+    className: "text-center"
+  }, react_1["default"].createElement(react_bootstrap_1.Col, {
+    className: "text-center border-end border-5 border-dark py-4 mt-1 mb-1"
+  }, react_1["default"].createElement(react_bootstrap_1.Table, {
+    responsive: true,
+    bordered: true,
+    size: "sm"
+  }, react_1["default"].createElement(TableHead_1["default"], null), react_1["default"].createElement(TableBody_1["default"], {
+    datas: datas,
+    cityId: cityId
+  }))))));
+};
 
+exports["default"] = CardContents;
+
+/***/ }),
+
+/***/ "./resources/ts/components/TableBody.tsx":
+/*!***********************************************!*\
+  !*** ./resources/ts/components/TableBody.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var moment_1 = __importDefault(__webpack_require__(/*! moment */ "./node_modules/moment/moment.js"));
+
+var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+var TableBody = function TableBody(_a) {
+  var datas = _a.datas,
+      cityId = _a.cityId;
+
+  var dateConver = function dateConver(date) {
+    if (date == (0, moment_1["default"])(new Date()).format('DD/MM')) {
+      return "Today";
+    } else if (date == (0, moment_1["default"])(new Date()).subtract(1, 'd').format('DD/MM')) {
+      return "Yesterday";
+    } else {
+      return date;
+    }
+  };
+
+  return react_1["default"].createElement("tbody", null, datas.map(function (listValue, index) {
+    if (listValue.city_id == cityId) {
+      return react_1["default"].createElement("tr", {
+        key: index
+      }, react_1["default"].createElement("td", null, dateConver((0, moment_1["default"])(listValue.date).format('DD/MM'))), react_1["default"].createElement("td", null, listValue.main, react_1["default"].createElement(react_bootstrap_1.Image, {
+        className: "mb-2",
+        width: "32",
+        height: "32",
+        src: "/assets/icon/".concat(listValue.icon_id, ".gif")
+      })), react_1["default"].createElement("td", null, listValue.temp_min, "\xB0C"), react_1["default"].createElement("td", null, listValue.temp_max, "\xB0C"), react_1["default"].createElement("td", null, listValue.wind_speed, "m/s"), react_1["default"].createElement("td", null, listValue.pressure, "hPa"));
+    }
+  }));
+};
+
+exports["default"] = TableBody;
+
+/***/ }),
+
+/***/ "./resources/ts/components/TableHead.tsx":
+/*!***********************************************!*\
+  !*** ./resources/ts/components/TableHead.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var TableHead = function TableHead() {
+  return react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null), react_1["default"].createElement("th", null, "Weather"), react_1["default"].createElement("th", null, "Max temp"), react_1["default"].createElement("th", null, "Min temp"), react_1["default"].createElement("th", null, "Wind"), react_1["default"].createElement("th", null, "pressure")));
+};
+
+exports["default"] = TableHead;
+
+/***/ }),
+
+/***/ "./resources/ts/index.tsx":
+/*!********************************!*\
+  !*** ./resources/ts/index.tsx ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
+
+var CardContents_1 = __importDefault(__webpack_require__(/*! ./components/CardContents */ "./resources/ts/components/CardContents.tsx"));
+
+var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+__webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ "./node_modules/bootstrap/dist/css/bootstrap.css");
+
+var App = function App() {
   return react_1["default"].createElement(react_bootstrap_1.Container, null, react_1["default"].createElement(react_bootstrap_1.Navbar, {
     expand: "lg",
     variant: "light",
@@ -9057,54 +9192,18 @@ var App = function App() {
   }, react_1["default"].createElement(react_bootstrap_1.Col, {
     xs: true,
     lg: "6"
-  }, react_1["default"].createElement(react_bootstrap_1.Card, null, react_1["default"].createElement(react_bootstrap_1.Card.Img, {
-    src: "/assets/image/sydney.gif",
-    alt: "Card image"
-  }), react_1["default"].createElement(react_bootstrap_1.Card.Body, null, react_1["default"].createElement(react_bootstrap_1.Card.Title, null, "SYDNEY"), react_1["default"].createElement(react_bootstrap_1.Row, {
-    className: "text-center"
-  }, react_1["default"].createElement(react_bootstrap_1.Col, {
-    className: "text-center border-end border-5 border-dark py-4 mt-1 mb-1"
-  }, react_1["default"].createElement(react_bootstrap_1.Table, {
-    responsive: true,
-    bordered: true,
-    size: "sm"
-  }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null), react_1["default"].createElement("th", null, "Weather"), react_1["default"].createElement("th", null, "Max temp"), react_1["default"].createElement("th", null, "Min temp"), react_1["default"].createElement("th", null, "Wind"), react_1["default"].createElement("th", null, "pressure"))), react_1["default"].createElement("tbody", null, datas.map(function (listValue, index) {
-    if (listValue.city_id == 2147714) {
-      return react_1["default"].createElement("tr", {
-        key: index
-      }, react_1["default"].createElement("td", null, (0, moment_1["default"])(listValue.date).format('DD/MM')), react_1["default"].createElement("td", null, listValue.main, react_1["default"].createElement(react_bootstrap_1.Image, {
-        className: "mb-2",
-        width: "30",
-        height: "30",
-        src: "/assets/icon/".concat(listValue.icon_id, ".gif")
-      })), react_1["default"].createElement("td", null, listValue.temp_min, "\xB0C"), react_1["default"].createElement("td", null, listValue.temp_max, "\xB0C"), react_1["default"].createElement("td", null, listValue.wind_speed, "m/s"), react_1["default"].createElement("td", null, listValue.pressure, "hPa"));
-    }
-  })))))))), react_1["default"].createElement(react_bootstrap_1.Col, {
+  }, react_1["default"].createElement(CardContents_1["default"], {
+    cityNameUpperCase: "SYDNEY",
+    cityNameLowerCase: "sydney",
+    cityId: Number("2147714")
+  })), react_1["default"].createElement(react_bootstrap_1.Col, {
     xs: true,
     lg: "6"
-  }, react_1["default"].createElement(react_bootstrap_1.Card, null, react_1["default"].createElement(react_bootstrap_1.Card.Img, {
-    src: "/assets/image/melbourne.gif",
-    alt: "Card image"
-  }), react_1["default"].createElement(react_bootstrap_1.Card.Body, null, react_1["default"].createElement(react_bootstrap_1.Card.Title, null, "MELBOURNE"), react_1["default"].createElement(react_bootstrap_1.Row, {
-    className: "text-center"
-  }, react_1["default"].createElement(react_bootstrap_1.Col, {
-    className: "text-center border-end border-5 border-dark py-4 mt-1 mb-1"
-  }, react_1["default"].createElement(react_bootstrap_1.Table, {
-    responsive: true,
-    bordered: true,
-    size: "sm"
-  }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", null, react_1["default"].createElement("th", null), react_1["default"].createElement("th", null, "Weather"), react_1["default"].createElement("th", null, "Max temp"), react_1["default"].createElement("th", null, "Min temp"), react_1["default"].createElement("th", null, "Wind"), react_1["default"].createElement("th", null, "pressure"))), react_1["default"].createElement("tbody", null, datas.map(function (listValue, index) {
-    if (listValue.city_id == 2158177) {
-      return react_1["default"].createElement("tr", {
-        key: index
-      }, react_1["default"].createElement("td", null, (0, moment_1["default"])(listValue.date).format('DD/MM')), react_1["default"].createElement("td", null, listValue.main, react_1["default"].createElement(react_bootstrap_1.Image, {
-        className: "mb-2",
-        width: "30",
-        height: "30",
-        src: "/assets/icon/".concat(listValue.icon_id, ".gif")
-      })), react_1["default"].createElement("td", null, listValue.temp_min, "\xB0C"), react_1["default"].createElement("td", null, listValue.temp_max, "\xB0C"), react_1["default"].createElement("td", null, listValue.wind_speed, "m/s"), react_1["default"].createElement("td", null, listValue.pressure, "hPa"));
-    }
-  }))))))))));
+  }, react_1["default"].createElement(CardContents_1["default"], {
+    cityNameUpperCase: "MELBOURNE",
+    cityNameLowerCase: "melbourne",
+    cityId: Number("2158177")
+  }))));
 };
 
 react_dom_1["default"].render(react_1["default"].createElement(App, null), document.getElementById('app'));

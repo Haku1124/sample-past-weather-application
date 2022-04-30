@@ -195,8 +195,8 @@ return [
     ])->toArray(),
 
     'citys' => [
-        'sydney' => env('CITY_SYDNEY'),
-        'melbourne' => env('CITY_MELBOURNE'),
+        'sydney' => env('MIX_CITY_SYDNEY'),
+        'melbourne' => env('MIX_CITY_MELBOURNE'),
     ],
 
     'api_key' => env('API_KEY'),
