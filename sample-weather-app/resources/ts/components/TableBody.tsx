@@ -28,8 +28,8 @@ const TableBody: React.FC<Props> = ({ datas, cityId }) => {
                         <tr key={index}>
                             <td>{dateConver(moment(listValue.date).format('DD/MM'))}</td>
                             <td>{listValue.main}<Image className="mb-2" width="32" height="32" src={`/assets/icon/${listValue.icon_id}.gif`} /></td>
-                            <td>{listValue.temp_min}°C</td>
                             <td>{listValue.temp_max}°C</td>
+                            <td>{listValue.temp_min}°C</td>
                             <td>{listValue.wind_speed}m/s</td>
                             <td>{listValue.pressure}hPa</td>
                         </tr>
